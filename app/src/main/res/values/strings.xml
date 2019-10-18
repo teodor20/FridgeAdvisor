@@ -35,4 +35,6 @@
         <item>Lunch</item>
         <item>Cocktail</item>
     </string-array>
+
+    <string name="category_recipes"> Choose Category </string>
 </resources>
