@@ -26,10 +26,13 @@
     <string name="menu_send">Send</string>
 
     <string name="products_list_title">My Products:</string>
+    <string name="product_1">Product 1</string>
+    <string name="product_2">Product 2</string>
+    <string name="product_3">Product 3</string>
     <string-array name="recipe_category_dropdown">
         <item>All</item>
         <item>Breakfast</item>
         <item>Lunch</item>
-        <item>Coctail</item>
+        <item>Cocktail</item>
     </string-array>
 </resources>
