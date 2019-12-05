@@ -25,6 +25,9 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
+    <string name="scan_title">Press the button to scan a product!</string>
+    <string name="scan_button_content_description">Scan Item</string>
+
     <string name="products_list_title">My Products:</string>
     <string name="product_1">Product 1</string>
     <string name="product_2">Product 2</string>
