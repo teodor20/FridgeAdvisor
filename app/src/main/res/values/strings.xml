@@ -23,7 +23,7 @@
     <string name="menu_slideshow">Recipes</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_communicate">Communicate</string>
 
     <string name="scan_title">Press the button to scan a product!</string>
     <string name="scan_button_content_description">Scan Item</string>
