@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,12 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+
 public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAdapter.RecipeViewHolder> {
 
     private List<Recipe> recipes;
     private LayoutInflater inflater;
 
-    public RecipeRecyclerViewAdapter(Context context, List<Recipe> recipes){
+
+    public static class RecipeViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView textView;
+        public RecipeViewHolder(TextView v) {
+            super(v);
+            textView = v;
+        }
+    }
+
+    public RecipeRecyclerAdapter(Context context, List<Recipe> recipes){
         super();
         this.recipes = recipes;
         this.inflater = LayoutInflater.from(context);
@@ -31,9 +41,10 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     @NonNull
     @Override
     public RecipeRecyclerAdapter.RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CardView recipeView = this.inflater.inflate(R.layout.activity_recipes);
-        RecipeViewHolder viewHolder = new RecipeViewHolder(this, recipeView);
-        return viewHolder;
+        TextView v = (TextView) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.activity_recipes, parent, false);
+        RecipeViewHolder vh = new RecipeViewHolder(v);
+        return vh;
     }
 
     @Override
@@ -55,19 +66,14 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
 
         TextView textViewLikes = holder.itemView.findViewById(R.id.textViewLikes);
         textViewLikes.setText(recipesToBeDisplayed.getRecipeLikes());
+
+        holder.textView.setText(recipes.indexOf(position));
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder implements CardView.OnClickListener{
 
-        private RecipeRecyclerAdapter adapter;
-        private CardView itemView;
-
-        public RecipeViewHolder(RecipeRecyclerAdapter adapter, CardView itemView){
-            super(itemView);
-            this.adapter = adapter;
-            this.itemView = itemView;
-        }
-
+    @Override
+    public int getItemCount() {
+        return recipes.size();
     }
 
 }

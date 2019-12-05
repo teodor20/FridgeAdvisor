@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context=".Recipes">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Recipes">
 
     <TextView
         android:id="@+id/RECIPES"
@@ -29,70 +25,68 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="383dp"
-        android:layout_height="553dp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/recipeLinearLayout"
+        android:layout_width="376dp"
+        android:layout_height="197dp"
+        android:layout_marginBottom="48dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RECIPES"
-        app:layout_constraintVertical_bias="0.483" />
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/recipeCardView"
-        android:layout_width="362dp"
-        android:layout_height="204dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recyclerView">
-
-        <LinearLayout
-            android:id="@+id/recipeLinearLayout"
-            android:layout_width="376dp"
-            android:layout_height="197dp"
-            android:layout_marginBottom="48dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/recipeCardView"
+            android:layout_width="362dp"
+            android:layout_height="204dp"
+            android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/imageViewRecipe"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:scr="@mipmap/ic_launcher" />
-
-            <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recipe: " />
-
-            <TextView
-                android:id="@+id/textViewUsing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Products in fridge for recipe: " />
-
-            <TextView
-                android:id="@+id/textViewMissing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Products missing: " />
-
-            <TextView
-                android:id="@+id/textViewLikes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Likes: " />
 
 
+                <ImageView
+                    android:id="@+id/imageViewRecipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:scr="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recipe: " />
+
+                <TextView
+                    android:id="@+id/textViewUsing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Products in fridge for recipe: " />
+
+                <TextView
+                    android:id="@+id/textViewMissing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Products missing: " />
+
+                <TextView
+                    android:id="@+id/textViewLikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Likes: " />
+
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
-
+    </android.support.v7.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

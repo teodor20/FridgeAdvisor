@@ -1,6 +1,7 @@
 package uk.ac.rgu.cwpartone;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
@@ -31,10 +32,14 @@ public class Recipes extends AppCompatActivity implements View.OnClickListener{
     private static final String API_KEY = "ce4972dbcc8b4b67b42ef294d5062c4d";
     private static final String RECIPES_JSON_URL = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=";
 
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     private List<Recipe> recipes;
 
     //private List<Products...> products;
-
     // views for each Recipe Field
     private ImageView imageViewRecipe;
     private TextView textViewName;
@@ -46,6 +51,18 @@ public class Recipes extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+
+
+        recyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new RecipeRecyclerAdapter(recipes);
+        recyclerView.setAdapter(mAdapter);
 
         //Get Products list as string separated by commas.
 
@@ -64,26 +81,37 @@ public class Recipes extends AppCompatActivity implements View.OnClickListener{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        TextView recipeCardView = findViewById(R.id.recipeCardView);
+                    TextView recipeCardView = findViewById(R.id.recipeCardView);
 
-                        List<Recipe> recipes = new ArrayList<Recipe>();
+                    List<Recipe> recipes = new ArrayList<Recipe>();
 
-                            try {
-                                JSONObject responseObj = new JSONObject(response);
-                                JSONObject recipeNameObj = responseObj.getJSONObject("title");
-                                JSONObject recipeImgObj = responseObj.getJSONObject("image");
-                                JSONObject recipeMissedObj = responseObj.getJSONObject("usedIngredients");
-                                JSONObject recipeUsingObj = responseObj.getJSONObject("missedIngredients");
-                                JSONObject recipeLikesObj = responseObj.getJSONObject("likes");
+                        try {
+                            JSONObject responseObj = new JSONObject(response);
+                            JSONObject recipeNameObj = responseObj.getJSONObject("title");
+                            JSONObject recipeImgObj = responseObj.getJSONObject("image");
+                            JSONObject recipeMissedObj = responseObj.getJSONObject("usedIngredients");
+                            JSONObject recipeUsingObj = responseObj.getJSONObject("missedIngredients");
+                            JSONObject recipeLikesObj = responseObj.getJSONObject("likes");
 
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                     }
                 }
+            }
 
-        }}, new Response.ErrorListener() {
+        }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+}, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
