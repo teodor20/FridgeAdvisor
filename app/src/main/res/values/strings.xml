@@ -39,5 +39,8 @@
         <item>Cocktail</item>
     </string-array>
 
+    <string name="API_Error">Product can\'t be found or API Key limit has been reached.</string>
+    <string name="API_Success">Success! The item has been added to your fridge!</string>
+
     <string name="category_recipes"> Choose Category </string>
 </resources>
