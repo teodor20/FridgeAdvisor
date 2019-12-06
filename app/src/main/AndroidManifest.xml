@@ -16,9 +16,9 @@
             android:name=".ScanActivity"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".Recipes"
-                  android:parentActivityName=".MainActivity"/>/>
+                  android:parentActivityName=".MainActivity"/>
         <activity android:name=".ProductsList"
-                  android:parentActivityName=".MainActivity"/>/>
+                  android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
