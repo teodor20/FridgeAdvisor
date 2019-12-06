@@ -33,7 +33,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class ScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler, DatePickerDialog.OnDateSetListener {
     ZXingScannerView scannerView;
     private String url="https://api.barcodelookup.com/v2/products?barcode=";
-    private String APIKey="&formatted=y&key=zvbfvvqjv1r09fpxoqrj79o1itv8pg";
+    private String APIKey="&formatted=y&key=sryjrxyio2de415iv78mp985imc9ob";
     private String date;
     private String productName;
     private final String sharedPrefFile = "uk.ac.rgu.cwpartone.demo";
