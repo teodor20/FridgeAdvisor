@@ -85,7 +85,9 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
     }
 
     @Override
-    public void onItemClick(View view, final int position) {
+    public void onItemClick(View view, final int itemClicked) {
+        position = itemClicked;
+        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         EditText NameText =  findViewById(R.id.EdtItemName);
         TextView DateText =  findViewById(R.id.EdtDate);
         String Data = data.get(position);
@@ -145,7 +147,15 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
             case R.id.BtnDelete:
                 data.remove(position);
                 adapter.notifyItemRemoved(position);
-                prefsEditor.remove(String.valueOf(position));
+                prefsEditor.clear();
+                for(String currentX : data) {
+                    String PrefKey;
+                    String PrefData;
+                    PrefKey = String.valueOf(data.size());
+                    PrefData = currentX;
+                    prefsEditor.putString(PrefKey, PrefData);
+
+                }
                 prefsEditor.apply();
                 Toast.makeText(ProductsList.this, "Removed: " + removedData, Toast.LENGTH_LONG).show();
                 break;
@@ -154,7 +164,15 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
                 removedData = data.get(position);
                 data.remove(position);
                 adapter.notifyItemRemoved(position);
-                prefsEditor.remove(String.valueOf(position));
+                prefsEditor.clear();
+                for(String currentX : data) {
+                    String PrefKey;
+                    String PrefData;
+                    PrefKey = String.valueOf(data.size());
+                    PrefData = currentX;
+                    prefsEditor.putString(PrefKey, PrefData);
+
+                }
                 prefsEditor.apply();
                 Toast.makeText(ProductsList.this, "Removed: " + removedData, Toast.LENGTH_LONG).show();
                 insertItem();

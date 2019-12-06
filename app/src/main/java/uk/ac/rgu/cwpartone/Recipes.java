@@ -23,7 +23,7 @@ public class Recipes extends AppCompatActivity implements MyRecyclerViewAdapter.
         setContentView(R.layout.activity_recipes);
         Log.d("MADE IT CHECKS", "MADE IT PAST ON CREATE");
         // data to populate the RecyclerView with
-        RecipeData.add("TESTITEM");
+        RecipeData.add("");
         Log.d("MADE IT CHECKS", "MADE IT PAST ADDING ITEM");
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvRecipes);
