@@ -128,6 +128,7 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
             PrefKey = String.valueOf(insertIndex);
             PrefText = item;
             prefsEditor.putString(PrefKey, PrefText);
+            prefsEditor.commit();
             prefsEditor.apply();
             Toast.makeText(this, "Added: " + PrefText + " to fridge", Toast.LENGTH_LONG).show();
             String PrefsData = sharedPrefs.getString(PrefKey, "not found");
