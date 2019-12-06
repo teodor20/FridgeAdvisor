@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,18 +15,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-public class ProductsList extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class ProductsList extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener, View.OnClickListener {
 
     List<String> data;
     MyRecyclerViewAdapter adapter;
     DatePickerDialog.OnDateSetListener DateSetListener;
+    int position;
     private static final String sharedPrefFile = "uk.ac.rgu.cwpartone.demo";
     private SharedPreferences sharedPrefs;
 
@@ -37,7 +34,7 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_list);
         sharedPrefs = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-        final TextView DateText = (TextView) findViewById(R.id.EdtDate);
+        final TextView DateText = findViewById(R.id.EdtDate);
         DateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,13 +58,14 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
             }
         };
 
-        Button Addbutton = (Button) findViewById(R.id.BtnAdd);
+        Button Addbutton = findViewById(R.id.BtnAdd);
         Addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertItem();
             }
         });
+
 
 
         // data to populate the RecyclerView with
@@ -88,30 +86,27 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
 
     @Override
     public void onItemClick(View view, final int position) {
-        EditText NameText = (EditText) findViewById(R.id.EdtItemName);
-        TextView DateText = (TextView) findViewById(R.id.EdtDate);
+        EditText NameText =  findViewById(R.id.EdtItemName);
+        TextView DateText =  findViewById(R.id.EdtDate);
         String Data = data.get(position);
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         String[] SplitData = Data.split("\\|");
 
         NameText.setText(SplitData[0]);
         DateText.setText(SplitData[1]);
 
-        Button DeleteBtn = (Button) findViewById(R.id.BtnDelete);
-        DeleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor prefsEditor = sharedPrefs.edit();
-                data.remove(position);
-                adapter.notifyItemRemoved(position);
-                prefsEditor.remove(String.valueOf(position));
-                Toast.makeText(ProductsList.this, "REMOVED AT POSITION: " + position, Toast.LENGTH_LONG).show();
-            }
-        });
+
+        Log.d("map values","MADE IT TEST");
+
+        Button DeleteButton = findViewById(R.id.BtnDelete);
+        DeleteButton.setOnClickListener(this);
+
+        Button UpdateButton = findViewById(R.id.BtnUpdate);
+        UpdateButton.setOnClickListener(this);
     }
+
     private void insertItem() {
-        EditText NameText = (EditText) findViewById(R.id.EdtItemName);
-        TextView DateText = (TextView) findViewById(R.id.EdtDate);
+        EditText NameText = findViewById(R.id.EdtItemName);
+        TextView DateText = findViewById(R.id.EdtDate);
         SharedPreferences.Editor prefsEditor = sharedPrefs.edit();
         String PrefKey;
         String PrefText;
@@ -132,16 +127,42 @@ public class ProductsList extends AppCompatActivity implements MyRecyclerViewAda
             PrefText = item;
             prefsEditor.putString(PrefKey, PrefText);
             prefsEditor.apply();
-            Toast.makeText(this, "Added: " + PrefText + " At key: " + PrefKey, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Added: " + PrefText + " to fridge", Toast.LENGTH_LONG).show();
             String PrefsData = sharedPrefs.getString(PrefKey, "not found");
-            Toast.makeText(this, "Prefs at index: " + PrefKey + " is" + PrefsData, Toast.LENGTH_LONG).show();
-            Toast.makeText(this, sharedPrefs.getAll().toString(), Toast.LENGTH_LONG);
             Map<String,?> keys = sharedPrefs.getAll();
-
             for(Map.Entry<String,?> entry : keys.entrySet()){
                 Log.d("map values",entry.getKey() + ": " + entry.getValue().toString());
             }
             adapter.notifyItemInserted(insertIndex);
         }
     }
+
+    @Override
+    public void onClick(View view) {
+        SharedPreferences.Editor prefsEditor = sharedPrefs.edit();
+        String removedData = data.get(position);
+        switch (view.getId()){
+            case R.id.BtnDelete:
+                data.remove(position);
+                adapter.notifyItemRemoved(position);
+                prefsEditor.remove(String.valueOf(position));
+                prefsEditor.apply();
+                Toast.makeText(ProductsList.this, "Removed: " + removedData, Toast.LENGTH_LONG).show();
+                break;
+            case R.id.BtnUpdate:
+                prefsEditor = sharedPrefs.edit();
+                removedData = data.get(position);
+                data.remove(position);
+                adapter.notifyItemRemoved(position);
+                prefsEditor.remove(String.valueOf(position));
+                prefsEditor.apply();
+                Toast.makeText(ProductsList.this, "Removed: " + removedData, Toast.LENGTH_LONG).show();
+                insertItem();
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

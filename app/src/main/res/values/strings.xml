@@ -44,4 +44,8 @@
 
     <string name="category_recipes"> Choose Category </string>
     <string name="annoying_ad">Try Fridge World - The best grocery management app in the world!</string>
+    <string name="add_new_item">Add New Item</string>
+    <string name="item_name">Item name</string>
+    <string name="item_date">Item date</string>
+    <string name="delete_item">Delete Item</string>
 </resources>
