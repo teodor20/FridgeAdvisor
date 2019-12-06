@@ -12,18 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Admin" android:parentActivityName=".Log_In"></activity>
         <activity
             android:name=".ScanActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".Recipes"
-                  android:parentActivityName=".MainActivity"/>
-        <activity android:name=".ProductsList"
-                  android:parentActivityName=".MainActivity"/>
-        <activity android:name=".signUp" android:parentActivityName=".Log_In"/>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Recipes"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ProductsList"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".signUp"
+            android:parentActivityName=".Log_In" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Log_In">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

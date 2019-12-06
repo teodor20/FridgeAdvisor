@@ -48,6 +48,10 @@ public class Log_In extends AppCompatActivity {
                         startActivity(new Intent(Log_In.this, MainActivity.class));
                         Toast.makeText(Log_In.this, "Signed in", Toast.LENGTH_SHORT).show();
                     }
+                    if (username.equals("Admin") && password.equals("Admin")){
+                        startActivity(new Intent(Log_In.this, Admin.class));
+                        Toast.makeText(Log_In.this, "Admin View", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
